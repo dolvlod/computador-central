@@ -30,16 +30,7 @@ Si no estás en la rama `computador-central`, cambia con:
 ```bash
 git checkout computador-central
 ```
-
-Si no la tienes localmente, usa:
-
-```bash
-git fetch origin
-git checkout -b computador-central origin/computador-central
-```
-
 ## 🛠️ Realizar cambios y subirlos
-
 Después de hacer tus cambios, ejecuta los siguientes comandos:
 
 ```bash
