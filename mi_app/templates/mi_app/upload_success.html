@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subida Exitosa</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        img { max-width: 100%; height: auto; display: block; margin: 20px auto; border: 1px solid #ddd; }
+        .message { color: green; font-weight: bold; margin-bottom: 15px; }
+        .error-message { color: red; font-weight: bold; margin-bottom: 15px; }
+        a { display: inline-block; margin-top: 15px; padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        a:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Imagen Procesada!</h1>
+        <p class="message">{{ message }}</p>
+
+        {% if png_url %}
+            <p>Aquí está la imagen con las detecciones:</p>
+            <img src="{{ png_url }}" alt="Imagen detectada">
+        {% else %}
+            <p class="error-message">No se pudo mostrar la imagen detectada.</p>
+        {% endif %}
+
+        {% if raw_filename %}
+            <p>Nombre del archivo RAW original recibido: <strong>{{ raw_filename }}</strong></p>
+        {% endif %}
+
+        <a href="/">Volver al formulario de subida</a>
+    </div>
+</body>
+</html>

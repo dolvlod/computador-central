@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detecciones de LEDs - Página Principal</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .message-box {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+        .error-message {
+            background-color: #ffe0e0;
+            color: #d32f2f;
+            border: 1px solid #d32f2f;
+        }
+        /* Grid simple para mostrar miniaturas */
+        .grid-imagenes {
+            display: grid; /* Usamos grid para más control */
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* 180px ancho mínimo por columna */
+            gap: 15px; /* Espacio entre imágenes */
+            width: 100%;
+            max-width: 1200px; /* Ancho máximo del grid */
+            justify-content: center; /* Centrar las imágenes */
+        }
+        .grid-imagenes div {
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow: hidden; /* Asegura que la imagen no desborde */
+        }
+        .grid-imagenes img {
+            max-width: 100%; /* La imagen no excede el ancho de su contenedor */
+            height: auto; /* Mantiene la proporción */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: block; /* Elimina espacio extra debajo de la imagen */
+            margin: 0 auto; /* Centra la imagen */
+        }
+        .filename-text {
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 5px;
+            word-break: break-all; /* Romper palabras largas si es necesario */
+        }
+    </style>
+
+    <script>
+        // Utiliza location.reload(true) para forzar una recarga desde el servidor,
+        // no desde la caché del navegador.
+        setTimeout(() => {
+            window.location.reload(true);
+        }, 1000); // Recarga cada 1 segundo
+    </script>
+</head>
+<body>
+    <h1>Imágenes de Detecciones</h1>
+    <p>Esta página se actualiza automáticamente cada segundo.</p>
+
+    {% if error_message %}
+        <div class="message-box error-message">
+            <p>{{ error_message }}</p>
+        </div>
+    {% endif %}
+
+    {% if imagenes %}
+        <div class="grid-imagenes">
+            {% for url_imagen in imagenes %}
+                <div>
+                    <img src="{{ url_imagen }}" alt="Detección: {{ url_imagen }}" />
+                    <p class="filename-text">{{ url_imagen|cut:MEDIA_URL }}</p> </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No se encontraron imágenes de detección (archivos 'detected_*.png') en la carpeta de medios.</p>
+    {% endif %}
+</body>
+</html>
